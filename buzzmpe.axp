@@ -797,14 +797,6 @@ outlet_pitch = _pitch;]]></code.krate>
    <comment type="patch/comment" x="420" y="476" text="CC13 =&gt; FX Size"/>
    <comment type="patch/comment" x="420" y="490" text="CC12 =&gt; FX Mix"/>
    <comment type="patch/comment" x="420" y="532" text="CC7 =&gt; Volume"/>
-   <obj type="tb/midi/utils/midithru" uuid="b3868bd5-625c-4482-9948-a34e59fe2a21" name="midithru_1" x="490" y="658">
-      <params/>
-      <attribs>
-         <combo attributeName="input" selection="usb device port 1"/>
-         <combo attributeName="output" selection="usb host port 3"/>
-         <combo attributeName="led" selection="on"/>
-      </attribs>
-   </obj>
    <nets>
       <net>
          <source obj="synth" outlet="outlet_1"/>
@@ -922,7 +914,7 @@ outlet_pitch = _pitch;]]></code.krate>
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>126</x>
+      <x>233</x>
       <y>23</y>
       <width>1415</width>
       <height>839</height>
