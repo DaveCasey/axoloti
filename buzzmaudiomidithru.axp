@@ -1,5 +1,5 @@
 <patch-1.0 appVersion="1.0.12">
-   <patcher type="patch/patcher" uuid="4d0137e9-a045-4f49-9815-1c7ce59273df" name="synth" x="182" y="14">
+   <patcher type="patch/patcher" uuid="7353df81-1f8a-45eb-b120-ede8bdc144cf" name="synth" x="182" y="14">
       <params>
          <frac32.u.map name="shape" value="0.0"/>
          <frac32.u.map name="timbre&gt;shape" value="27.5"/>
@@ -530,7 +530,7 @@ outlet_pitch = _pitch;]]></code.krate>
          <table attributeName="filename" table="/karpmpe/patch.bin"/>
       </attribs>
    </obj>
-   <patcher type="patch/patcher" uuid="fb6ea48a-a20b-46cf-a02f-ee8b86690d77" name="FX" x="434" y="42">
+   <patcher type="patch/patcher" uuid="6cd3c411-2ab8-4282-93eb-6ac2a5ab82c4" name="FX" x="434" y="42">
       <params/>
       <attribs/>
       <subpatch appVersion="1.0.12">
@@ -922,8 +922,8 @@ outlet_pitch = _pitch;]]></code.krate>
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>126</x>
-      <y>23</y>
+      <x>72</x>
+      <y>103</y>
       <width>1415</width>
       <height>839</height>
    </windowPos>
