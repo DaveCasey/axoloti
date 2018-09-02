@@ -1,0 +1,221 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="fx/clds/clds" uuid="FD6EFF1B-3317-4BA5-A952-841327FC2F47" name="clds_1" x="980" y="0">
+      <params>
+         <frac32.u.map name="position" value="10.0"/>
+         <frac32.u.map name="size" value="59.0"/>
+         <frac32.s.map name="pitch" value="16.0"/>
+         <frac32.u.map name="density" value="62.5"/>
+         <frac32.u.map name="texture" value="16.5"/>
+         <frac32.u.map name="mix" value="46.5"/>
+         <frac32.u.map name="spread" value="64.0"/>
+         <frac32.u.map name="feedback" value="63.5"/>
+         <frac32.u.map name="reverb" value="58.0"/>
+         <int32.hradio name="playmode" value="1"/>
+         <bool32.tgl name="mono" value="0"/>
+         <bool32.tgl name="lofi" value="0"/>
+         <bool32.tgl name="silence" value="0"/>
+         <bool32.tgl name="bypass" value="0"/>
+      </params>
+      <attribs>
+         <combo attributeName="large buffer" selection="131072"/>
+         <combo attributeName="small buffer" selection="65536"/>
+      </attribs>
+   </obj>
+   <obj type="osc/brds/plucked" uuid="e78bfbb5-2963-49a0-8863-dead044d748c" name="plucked_1" x="840" y="14">
+      <params>
+         <frac32.s.map name="pitch" value="0.0"/>
+         <frac32.u.map name="timbre" value="42.5"/>
+         <frac32.u.map name="color" value="14.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="MORE!" x="112" y="42">
+      <params>
+         <frac32.u.map name="value" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="sel/sel fp 16" uuid="3d0698411643c13e342d17c8750d68d01689c658" name="bdprob" x="420" y="42">
+      <params>
+         <frac32.u.mapvsl name="b0" onParent="true" value="10.5"/>
+         <frac32.u.mapvsl name="b1" value="0.0"/>
+         <frac32.u.mapvsl name="b2" value="13.5"/>
+         <frac32.u.mapvsl name="b3" value="0.0"/>
+         <frac32.u.mapvsl name="b4" onParent="true" value="6.0"/>
+         <frac32.u.mapvsl name="b5" value="0.0"/>
+         <frac32.u.mapvsl name="b6" value="12.5"/>
+         <frac32.u.mapvsl name="b7" value="0.0"/>
+         <frac32.u.mapvsl name="b8" value="9.0"/>
+         <frac32.u.mapvsl name="b9" value="0.0"/>
+         <frac32.u.mapvsl name="b10" value="4.0"/>
+         <frac32.u.mapvsl name="b11" value="0.0"/>
+         <frac32.u.mapvsl name="b12" value="5.5"/>
+         <frac32.u.mapvsl name="b13" value="8.5"/>
+         <frac32.u.mapvsl name="b14" value="15.0"/>
+         <frac32.u.mapvsl name="b15" value="10.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="drj/audio/out_stereo_vol" uuid="awca1a567f535acc21055669829101d3ee7f0189" name="out_stereo_vol_1" x="1120" y="70">
+      <params>
+         <frac32.u.map name="volume" value="27.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="./probtrigger" uuid="8483ec14-5df1-4245-a54a-f79ea1af9855" name="probtrigger_2" x="714" y="98">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="lfo/square" uuid="de6909eb64db13af5b43f979a4c130024b3a4793" name="square_1" x="84" y="140">
+      <params>
+         <frac32.s.map name="pitch" value="2.700000286102295"/>
+      </params>
+      <attribs/>
+   </obj>
+   <patcher type="patch/patcher" uuid="8e82bc9a-43a7-4d1c-94dd-2a9f42374845" name="divider" x="238" y="140">
+      <params/>
+      <attribs/>
+      <subpatch appVersion="1.0.12">
+         <obj type="patch/outlet b" uuid="191792f616d4835dba0b55375474a12942e5bcbd" name="16" x="364" y="126">
+            <params/>
+            <attribs/>
+         </obj>
+         <obj type="patch/inlet b" uuid="3b0d3eacb5bb978cb05d1372aa2714d5a4790844" name="clock" x="42" y="154">
+            <params/>
+            <attribs/>
+         </obj>
+         <obj type="logic/counter" uuid="7a141ba82230e54e5f5cd12da5dbe5a74ba854a5" name="counter_3" x="196" y="210">
+            <params>
+               <int32 name="maximum" value="4"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="patch/inlet b" uuid="3b0d3eacb5bb978cb05d1372aa2714d5a4790844" name="reset" x="42" y="224">
+            <params/>
+            <attribs/>
+         </obj>
+         <obj type="patch/outlet b" uuid="191792f616d4835dba0b55375474a12942e5bcbd" name="4 (/4)" x="364" y="238">
+            <params/>
+            <attribs/>
+         </obj>
+         <obj type="patch/outlet b" uuid="191792f616d4835dba0b55375474a12942e5bcbd" name="1 (/16)" x="364" y="350">
+            <params/>
+            <attribs/>
+         </obj>
+         <obj type="logic/counter" uuid="7a141ba82230e54e5f5cd12da5dbe5a74ba854a5" name="counter_1" x="196" y="378">
+            <params>
+               <int32 name="maximum" value="16"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="patch/outlet i" uuid="aae2176b26209e34e4fdeba5edb1ace82d178655" name="16count" x="364" y="406">
+            <params/>
+            <attribs/>
+         </obj>
+         <nets>
+            <net>
+               <source obj="clock" outlet="inlet"/>
+               <dest obj="counter_1" inlet="trig"/>
+               <dest obj="16" inlet="outlet"/>
+               <dest obj="counter_3" inlet="trig"/>
+            </net>
+            <net>
+               <source obj="counter_1" outlet="c"/>
+               <dest obj="1 (/16)" inlet="outlet"/>
+            </net>
+            <net>
+               <source obj="counter_3" outlet="c"/>
+               <dest obj="4 (/4)" inlet="outlet"/>
+            </net>
+            <net>
+               <source obj="reset" outlet="inlet"/>
+               <dest obj="counter_3" inlet="r"/>
+               <dest obj="counter_1" inlet="r"/>
+            </net>
+            <net>
+               <source obj="counter_1" outlet="o"/>
+               <dest obj="16count" inlet="outlet"/>
+            </net>
+         </nets>
+         <settings>
+            <subpatchmode>normal</subpatchmode>
+            <MidiChannel>1</MidiChannel>
+            <NPresets>0</NPresets>
+            <NPresetEntries>0</NPresetEntries>
+            <NModulationSources>0</NModulationSources>
+            <NModulationTargetsPerSource>0</NModulationTargetsPerSource>
+         </settings>
+         <notes><![CDATA[]]></notes>
+         <windowPos>
+            <x>0</x>
+            <y>2</y>
+            <width>674</width>
+            <height>716</height>
+         </windowPos>
+      </subpatch>
+   </patcher>
+   <obj type="a773/quantizer" uuid="4720391c-8f92-430f-bfde-f9168fd622cf" name="quantizer_1" x="462" y="364">
+      <params>
+         <bin12 name="b12" value="129"/>
+      </params>
+      <attribs/>
+   </obj>
+   <nets>
+      <net>
+         <source obj="square_1" outlet="wave"/>
+         <dest obj="divider" inlet="clock"/>
+      </net>
+      <net>
+         <source obj="divider" outlet="16count"/>
+         <dest obj="bdprob" inlet="in"/>
+      </net>
+      <net>
+         <source obj="plucked_1" outlet="wave"/>
+         <dest obj="clds_1" inlet="l"/>
+         <dest obj="clds_1" inlet="r"/>
+      </net>
+      <net>
+         <source obj="divider" outlet="16"/>
+         <dest obj="probtrigger_2" inlet="trigger"/>
+      </net>
+      <net>
+         <source obj="bdprob" outlet="o"/>
+         <dest obj="probtrigger_2" inlet="prob+"/>
+      </net>
+      <net>
+         <source obj="MORE!" outlet="out"/>
+         <dest obj="probtrigger_2" inlet="more+"/>
+      </net>
+      <net>
+         <source obj="probtrigger_2" outlet="shoot"/>
+         <dest obj="plucked_1" inlet="strike"/>
+      </net>
+      <net>
+         <source obj="clds_1" outlet="l"/>
+         <dest obj="out_stereo_vol_1" inlet="left"/>
+      </net>
+      <net>
+         <source obj="clds_1" outlet="r"/>
+         <dest obj="out_stereo_vol_1" inlet="right"/>
+      </net>
+      <net>
+         <source obj="probtrigger_2" outlet="lastprop"/>
+         <dest obj="quantizer_1" inlet="note"/>
+      </net>
+      <net>
+         <source obj="quantizer_1" outlet="note"/>
+         <dest obj="plucked_1" inlet="pitch"/>
+         <dest obj="clds_1" inlet="pitch"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>131</x>
+      <y>99</y>
+      <width>1290</width>
+      <height>763</height>
+   </windowPos>
+</patch-1.0>

@@ -1,0 +1,273 @@
+<patch-1.0 appVersion="1.0.12">
+   <patcher type="patch/patcher" uuid="035d8a9e-7deb-4c04-b087-31d7f509add1" name="synth" x="182" y="0">
+      <params>
+         <frac32.s.map name="lmnts_1:pitch" value="1.0"/>
+         <frac32.u.map name="lmnts_1:strike level" value="59.0"/>
+         <frac32.u.map name="lmnts_1:strike mallet" value="32.5"/>
+         <frac32.u.map name="lmnts_1:strike timbre" value="45.0"/>
+         <frac32.u.map name="lmnts_1:geometry" value="0.0"/>
+         <frac32.u.map name="lmnts_1:brightness" value="33.0"/>
+         <frac32.u.map name="lmnts_1:damping" value="51.5"/>
+         <frac32.u.map name="lmnts_1:position" value="30.5"/>
+         <frac32.u.map name="lmnts_1:space" value="30.5"/>
+         <frac32.s.map name="lmnts_1:mod pitch" value="64.0"/>
+         <frac32.u.map name="lmnts_1:mod depth" value="0.0"/>
+      </params>
+      <attribs>
+         <combo attributeName="poly" selection="1"/>
+         <combo attributeName="midichannel" selection="1"/>
+         <combo attributeName="mididevice" selection="omni"/>
+         <combo attributeName="midiport" selection="omni"/>
+      </attribs>
+      <subpatch appVersion="1.0.12">
+         <obj type="fx/lmnts/lmnts" uuid="361A8551-0FF8-4559-9D34-6419E86449E7" name="lmnts_1" x="504" y="0">
+            <params>
+               <frac32.s.map name="pitch" onParent="true" value="0.0"/>
+               <frac32.u.map name="contour" value="0.0"/>
+               <frac32.u.map name="bow level" value="0.0"/>
+               <frac32.u.map name="bow timbre" value="0.0"/>
+               <frac32.u.map name="blow level" value="0.0"/>
+               <frac32.u.map name="blow flow" value="0.0"/>
+               <frac32.u.map name="blow timbre" value="0.0"/>
+               <frac32.u.map name="strike level" onParent="true" value="0.0"/>
+               <frac32.u.map name="strike mallet" onParent="true" value="0.0"/>
+               <frac32.u.map name="strike timbre" onParent="true" value="0.0"/>
+               <int32.hradio name="resonator" value="1"/>
+               <frac32.u.map name="geometry" onParent="true" value="0.0"/>
+               <frac32.u.map name="brightness" onParent="true" value="0.0"/>
+               <frac32.u.map name="damping" onParent="true" value="0.0"/>
+               <frac32.u.map name="position" onParent="true" value="0.0"/>
+               <frac32.u.map name="space" onParent="true" value="0.0"/>
+               <frac32.s.map name="mod pitch" onParent="true" value="0.0"/>
+               <frac32.u.map name="mod depth" onParent="true" value="0.0"/>
+               <frac32.u.map name="seed" value="0.0"/>
+               <bool32.tgl name="bypass" value="0"/>
+               <bool32.tgl name="easter egg" value="0"/>
+            </params>
+            <attribs/>
+         </obj>
+         <patchobj type="patch/object" uuid="97a2b03c-61b7-47b1-b680-5fe62d4e3e48" name="mpe_1" x="56" y="70">
+            <params/>
+            <attribs/>
+            <object id="patch/object" uuid="97a2b03c-61b7-47b1-b680-5fe62d4e3e48">
+               <sDescription>Controller input for MIDI Polyphonic Expression (tailored to Linnstrument)</sDescription>
+               <author>Johannes Elliesen</author>
+               <license>BSD</license>
+               <helpPatch>mpe.axh</helpPatch>
+               <inlets/>
+               <outlets>
+                  <frac32.bipolar name="note" description="midi note number (-64..63)"/>
+                  <bool32 name="gate" description="key pressed, no retrigger legato"/>
+                  <bool32 name="gate2" description="key pressed, retrigger on legato"/>
+                  <frac32.positive name="velocity" description="note-on velocity"/>
+                  <frac32.positive name="releaseVelocity" description="note-off velocity"/>
+                  <frac32.positive name="pressure" description="continuous pressure"/>
+                  <frac32 name="bend" description="continuous pitchbend (-64..63)"/>
+                  <frac32 name="timbre" description="continuous timbre (-64..63)"/>
+                  <frac32 name="pitch" description="pitch including pitchbend"/>
+               </outlets>
+               <displays/>
+               <params/>
+               <attribs/>
+               <includes/>
+               <code.declaration><![CDATA[int8_t _note;
+int32_t _gate;
+int32_t _gate2;
+uint32_t _velo;
+uint32_t _rvelo;
+uint32_t _pressure;
+int32_t _bend;
+int32_t _timbre;
+uint8_t _lastRPN_LSB;
+uint8_t _lastRPN_MSB;
+uint8_t _bendRange;
+int32_t _pitch;
+int32_t _xl,_yl,_zl;static const uint8_t xccl = 85;static const uint8_t yccl = 87;static const uint8_t zccl = 86;]]></code.declaration>
+               <code.init><![CDATA[_gate = 0;
+_note = 0;
+_pressure = 0;
+_bend = 0;
+_timbre = 0;
+_bendRange = 48;
+_xl=_yl=_zl=0;]]></code.init>
+               <code.krate><![CDATA[outlet_note= _note<<21;
+outlet_gate= _gate;
+outlet_gate2= _gate2;
+_gate2 = _gate;
+outlet_velocity= _velo;
+outlet_releaseVelocity= _rvelo;
+outlet_pressure = _pressure;
+outlet_bend = _bend;
+outlet_timbre = _timbre;
+outlet_pitch = _pitch;]]></code.krate>
+               <code.midihandler><![CDATA[if ((status == MIDI_NOTE_ON + attr_midichannel) && (data2)) {
+  _bend = 0;
+  _velo = data2<<20;
+  _note = data1-64;
+  _gate = 1<<27;
+  _gate2 = 0;
+  _pitch = (_note << 21) + ((_bend >> 6)* _bendRange );
+} else if (((status == MIDI_NOTE_ON + attr_midichannel) && (!data2))||
+          (status == MIDI_NOTE_OFF + attr_midichannel)) {
+  if (_note == data1-64) {
+    _rvelo = data2<<20;
+    _gate = 0;
+    _pressure = 0;
+  }
+} else if (status == attr_midichannel + MIDI_CHANNEL_PRESSURE) {
+  _pressure = (data1<<20) + _zl;
+} else if (status == attr_midichannel + MIDI_PITCH_BEND) {
+  _bend = (((int)((data2<<7)+data1)-0x2000)<<14) + _xl;
+  _pitch = (_note << 21) + ((_bend >> 6)* _bendRange );
+} else if (status == attr_midichannel + MIDI_CONTROL_CHANGE) {
+  if (data1 == MIDI_C_TIMBRE) {
+    _timbre = (((int)(data2<<7)-0x2000)<<14) + _yl;
+  } else if (data1 == zccl) {
+   _zl = data2 << 13;  } else if (data1 == xccl) {
+   _xl = data2 << 7;  } else if (data1 == yccl) {
+   _yl = data2 << 14;  } else if(data1 == MIDI_C_ALL_NOTES_OFF) {
+    _gate = 0;
+  } else if (data1 == MIDI_C_RPN_MSB || data1 == MIDI_C_RPN_LSB || data1 == MIDI_C_DATA_ENTRY) {
+    switch(data1) {
+         case MIDI_C_RPN_LSB: _lastRPN_LSB = data2; break;
+         case MIDI_C_RPN_MSB: _lastRPN_MSB = data2; break;
+         case MIDI_C_DATA_ENTRY: {
+              if (_lastRPN_LSB == 0 && _lastRPN_MSB == 0) {
+                _bendRange = data2;
+              }
+            }
+            break;
+        default: break;
+    }
+  }
+}]]></code.midihandler>
+            </object>
+         </patchobj>
+         <obj type="patch/outlet a" uuid="abd8c5fd3b0524a6630f65cad6dc27f6c58e2a3e" name="outlet_2" x="1106" y="70">
+            <params/>
+            <attribs/>
+         </obj>
+         <obj type="patch/outlet a" uuid="abd8c5fd3b0524a6630f65cad6dc27f6c58e2a3e" name="outlet_1" x="1092" y="182">
+            <params/>
+            <attribs/>
+         </obj>
+         <nets>
+            <net>
+               <source obj="mpe_1" outlet="pitch"/>
+               <dest obj="lmnts_1" inlet="pitch"/>
+            </net>
+            <net>
+               <source obj="mpe_1" outlet="gate"/>
+               <dest obj="lmnts_1" inlet="gate"/>
+            </net>
+            <net>
+               <source obj="lmnts_1" outlet="l"/>
+               <dest obj="outlet_2" inlet="outlet"/>
+            </net>
+            <net>
+               <source obj="lmnts_1" outlet="r"/>
+               <dest obj="outlet_1" inlet="outlet"/>
+            </net>
+            <net>
+               <source obj="mpe_1" outlet="pressure"/>
+               <dest obj="lmnts_1" inlet="brightness"/>
+            </net>
+            <net>
+               <source obj="mpe_1" outlet="timbre"/>
+               <dest obj="lmnts_1" inlet="strike timbre"/>
+            </net>
+         </nets>
+         <settings>
+            <subpatchmode>polyexpression</subpatchmode>
+            <MidiChannel>1</MidiChannel>
+            <HasMidiChannelSelector>true</HasMidiChannelSelector>
+            <NPresets>8</NPresets>
+            <NPresetEntries>32</NPresetEntries>
+            <NModulationSources>8</NModulationSources>
+            <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+         </settings>
+         <notes><![CDATA[]]></notes>
+         <windowPos>
+            <x>210</x>
+            <y>55</y>
+            <width>1230</width>
+            <height>808</height>
+         </windowPos>
+      </subpatch>
+   </patcher>
+   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="714" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="midi/in/cc" uuid="6096d217701cbdf251a9ab6ba029af78c5722a56" name="cc_2" x="364" y="42">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="12"/>
+         <spinner attributeName="default" value="30"/>
+      </attribs>
+   </obj>
+   <obj type="midi/in/cc" uuid="6096d217701cbdf251a9ab6ba029af78c5722a56" name="cc_3" x="364" y="140">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="13"/>
+         <spinner attributeName="default" value="80"/>
+      </attribs>
+   </obj>
+   <obj type="tb/audio/mixer" uuid="2894bf79-3ef1-47ca-a6ce-ed5aca0e9478" name="mixer_1" x="28" y="154">
+      <params/>
+      <attribs>
+         <combo attributeName="left" selection="0dB"/>
+         <combo attributeName="right" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="midi/in/cc" uuid="6096d217701cbdf251a9ab6ba029af78c5722a56" name="cc_4" x="364" y="238">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="14"/>
+         <spinner attributeName="default" value="80"/>
+      </attribs>
+   </obj>
+   <obj type="tb/midi/utils/midithru" uuid="b3868bd5-625c-4482-9948-a34e59fe2a21" name="midithru_1" x="28" y="266">
+      <params/>
+      <attribs>
+         <combo attributeName="input" selection="usb device port 1"/>
+         <combo attributeName="output" selection="usb host port 3"/>
+         <combo attributeName="led" selection="on"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="434" y="392" text="Assignment (put CC12-19 on the faders):"/>
+   <comment type="patch/comment" x="434" y="406" text="CC19 =&gt; Shape"/>
+   <comment type="patch/comment" x="434" y="420" text="CC18 =&gt; Timbre &gt; Shape"/>
+   <comment type="patch/comment" x="434" y="434" text="CC17 =&gt; Strike"/>
+   <comment type="patch/comment" x="434" y="448" text="CC16 =&gt; Strike Decay"/>
+   <comment type="patch/comment" x="434" y="462" text="CC15 =&gt; Filter Cutoff"/>
+   <comment type="patch/comment" x="434" y="476" text="CC14 =&gt; FX Brightness"/>
+   <comment type="patch/comment" x="434" y="490" text="CC13 =&gt; FX Size"/>
+   <comment type="patch/comment" x="434" y="504" text="CC12 =&gt; FX Mix"/>
+   <comment type="patch/comment" x="434" y="546" text="CC7 =&gt; Volume"/>
+   <nets>
+      <net>
+         <source obj="synth" outlet="outlet_2"/>
+         <dest obj="out_1" inlet="left"/>
+      </net>
+      <net>
+         <source obj="synth" outlet="outlet_1"/>
+         <dest obj="out_1" inlet="right"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>polyexpression</subpatchmode>
+      <MidiChannel>1</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>767</x>
+      <y>23</y>
+      <width>1092</width>
+      <height>839</height>
+   </windowPos>
+</patch-1.0>

@@ -1,0 +1,207 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="ctrl/button" uuid="ef3d13774349df85aa9bfecf30dbc91ab8488b3f" name="bang" x="42" y="28">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/dial b" uuid="862e7d7f29093cb1ce4aed72244d118ad4d46692" name="pitch" x="168" y="28">
+      <params>
+         <frac32.s.map name="value" value="57.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="350" y="70" text="resonator modulation"/>
+   <obj type="ctrl/dial b" uuid="862e7d7f29093cb1ce4aed72244d118ad4d46692" name="dial_1" x="350" y="84">
+      <params>
+         <frac32.s.map name="value" value="57.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="mod depth" x="420" y="84">
+      <params>
+         <frac32.u.map name="value" value="54.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="504" y="84" text="IMPORTANT NOTE:"/>
+   <comment type="patch/comment" x="504" y="98" text="modal limitations (cpu)"/>
+   <comment type="patch/comment" x="672" y="98" text="pitch + mod freq need to be high, also try geometry"/>
+   <comment type="patch/comment" x="504" y="112" text="strings limitation (cpu)"/>
+   <comment type="patch/comment" x="672" y="112" text="pitch + mod freq &lt;=0.0"/>
+   <comment type="patch/comment" x="924" y="112" text="future: will reduce string count, so greater range"/>
+   <obj type="osc/sine" uuid="6e094045cca76a9dbf7ebfa72e44e4700d2b3ba" name="sine_1" x="140" y="154">
+      <params>
+         <frac32.s.map name="pitch" value="-1.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="volume" x="714" y="182">
+      <params>
+         <frac32.u.map name="value" value="12.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="osc/saw medium" uuid="388a55fef8413cfaf26a2a76ed21a7c28bef4e9d" name="saw_1" x="28" y="210">
+      <params>
+         <frac32.s.map name="pitch" value="-13.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="midi/in/keyb note" uuid="ac0cd98e6c0373b7be73d25900342a62ebcf5f" name="keyb_1" x="1036" y="210">
+      <params/>
+      <attribs>
+         <spinner attributeName="note" value="64"/>
+      </attribs>
+   </obj>
+   <obj type="gain/vca" uuid="a9f2dcd18043e2f47364e45cb8814f63c2a37c0d" name="vca_3" x="378" y="224">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="env/ad" uuid="255cb0cd67470c7498f9c33b820facd26aa629ce" name="ad_2" x="140" y="280">
+      <params>
+         <frac32.s.map name="a" value="-64.0"/>
+         <frac32.s.map name="d" value="29.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="gain/vca" uuid="a9f2dcd18043e2f47364e45cb8814f63c2a37c0d" name="vca_4" x="252" y="280">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="fx/lmnts/lmnts" uuid="361A8551-0FF8-4559-9D34-6419E86449E7" name="lmnts_1" x="532" y="280">
+      <params>
+         <frac32.s.map name="pitch" value="0.0"/>
+         <frac32.u.map name="contour" value="31.5"/>
+         <frac32.u.map name="bow level" value="0.5"/>
+         <frac32.u.map name="bow timbre" value="12.5"/>
+         <frac32.u.map name="blow level" value="0.0"/>
+         <frac32.u.map name="blow flow" value="2.0"/>
+         <frac32.u.map name="blow timbre" value="1.0"/>
+         <frac32.u.map name="strike level" value="35.5"/>
+         <frac32.u.map name="strike mallet" value="47.0"/>
+         <frac32.u.map name="strike timbre" value="38.0"/>
+         <int32.hradio name="resonator" value="1"/>
+         <frac32.u.map name="geometry" value="16.0"/>
+         <frac32.u.map name="brightness" value="51.5"/>
+         <frac32.u.map name="damping" value="30.5"/>
+         <frac32.u.map name="position" value="64.0"/>
+         <frac32.u.map name="space" value="49.0"/>
+         <frac32.s.map name="mod pitch" value="0.0"/>
+         <frac32.u.map name="mod depth" value="0.0"/>
+         <frac32.u.map name="seed" value="10.649999618530273"/>
+         <bool32.tgl name="bypass" value="0"/>
+         <bool32.tgl name="easter egg" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="gain/vca" uuid="a9f2dcd18043e2f47364e45cb8814f63c2a37c0d" name="vca_1" x="714" y="280">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gain/vca" uuid="a9f2dcd18043e2f47364e45cb8814f63c2a37c0d" name="vca_2" x="770" y="280">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="854" y="280">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="midi/in/keyb" uuid="53b04874696932f38aceaa168bd5d9efb743716d" name="keyb_2" x="1050" y="350">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="midi/ctrl/mpe" uuid="94323477e6476a10b9332922e5dfcd2705641af1" name="mpe_1" x="1022" y="476">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="70" y="588" text="known issues:"/>
+   <comment type="patch/comment" x="70" y="602" text="sounds on startup"/>
+   <comment type="patch/comment" x="70" y="616" text="modal model issues"/>
+   <comment type="patch/comment" x="70" y="630" text="strings model, only low pitch"/>
+   <comment type="patch/comment" x="644" y="994" text="modal, string , strings"/>
+   <nets>
+      <net>
+         <source obj="vca_1" outlet="o"/>
+         <dest obj="out_1" inlet="left"/>
+      </net>
+      <net>
+         <source obj="vca_2" outlet="o"/>
+         <dest obj="out_1" inlet="right"/>
+      </net>
+      <net>
+         <source obj="lmnts_1" outlet="l"/>
+         <dest obj="vca_1" inlet="a"/>
+      </net>
+      <net>
+         <source obj="lmnts_1" outlet="r"/>
+         <dest obj="vca_2" inlet="a"/>
+      </net>
+      <net>
+         <source obj="volume" outlet="out"/>
+         <dest obj="vca_1" inlet="v"/>
+         <dest obj="vca_2" inlet="v"/>
+      </net>
+      <net>
+         <source obj="bang" outlet="o"/>
+         <dest obj="ad_2" inlet="trig"/>
+         <dest obj="vca_3" inlet="v"/>
+      </net>
+      <net>
+         <source obj="saw_1" outlet="wave"/>
+         <dest obj="vca_4" inlet="a"/>
+      </net>
+      <net>
+         <source obj="ad_2" outlet="env"/>
+         <dest obj="vca_4" inlet="v"/>
+      </net>
+      <net>
+         <source obj="mod depth" outlet="out"/>
+         <dest obj="lmnts_1" inlet="mod depth"/>
+      </net>
+      <net>
+         <source obj="dial_1" outlet="out"/>
+         <dest obj="lmnts_1" inlet="mod pitch"/>
+      </net>
+      <net>
+         <source obj="vca_4" outlet="o"/>
+         <dest obj="lmnts_1" inlet="strike"/>
+      </net>
+      <net>
+         <source obj="sine_1" outlet="wave"/>
+         <dest obj="vca_3" inlet="a"/>
+      </net>
+      <net>
+         <source obj="vca_3" outlet="o"/>
+         <dest obj="lmnts_1" inlet="blow"/>
+      </net>
+      <net>
+         <source obj="mpe_1" outlet="gate"/>
+         <dest obj="lmnts_1" inlet="gate"/>
+      </net>
+      <net>
+         <source obj="mpe_1" outlet="pitch"/>
+         <dest obj="lmnts_1" inlet="pitch"/>
+      </net>
+      <net>
+         <source obj="mpe_1" outlet="pressure"/>
+         <dest obj="lmnts_1" inlet="bow level"/>
+         <dest obj="lmnts_1" inlet="damping"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>polyexpression</subpatchmode>
+      <MidiChannel>1</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>0</x>
+      <y>23</y>
+      <width>1440</width>
+      <height>839</height>
+   </windowPos>
+</patch-1.0>
